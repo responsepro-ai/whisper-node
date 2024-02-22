@@ -25,6 +25,12 @@ const MODELS_LIST = [
 
 
 const askModel = async () => {
+  // check if a model name is provided via environment variable
+  if (process.env.WHISPER_MODEL) {
+    console.log("[whisper-node] WHISPER_MODEL environment variable detected. Using", process.env.WHISPER_MODEL);
+    return process.env.WHISPER_MODEL;
+  }
+
   const answer = await readlineSync.question(`\n[whisper-node] Enter model name (e.g. 'base.en') or 'cancel' to exit\n(ENTER for base.en): `)
 
   if (answer === "cancel") {
